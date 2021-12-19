@@ -1,7 +1,7 @@
-const fileGen = () => {
-  const src = "this is a test data";
-  const testBlob = new Blob([src], { type: "text/plain" });
-  console.log(testBlob);
+const fileGen = (content: string, contentType = "text/plain") => {
+  const result = new Blob([content], { type: contentType });
+  console.log(result);
+  return result;
 };
 
 export { fileGen };

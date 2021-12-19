@@ -6,7 +6,6 @@ import { fileGen } from "./utilities/fileGen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  fileGen();
   return (
     <div className="App">
       <Layout>
