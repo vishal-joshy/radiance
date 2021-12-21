@@ -1,23 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface GeneralSlice {
-  priority: null | string;
+  data: any;
 }
 
 const initialState: GeneralSlice = {
-  priority: null,
+  data: {},
 };
 
 export const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
-    setGeneral: (state, action: PayloadAction<null | string>) => {
-      state.priority = action.payload;
+    setGeneral: (state, action: PayloadAction<null | any>) => {
+      state.data = { ...state.data, ...action.payload };
+    },
+    removeFromGeneral: (state, action: PayloadAction<null | any>) => {
+      const key = action.payload;
+      const result = { ...state.data };
+      delete result[key];
+      state.data = result;
     },
   },
 });
 
-export const { setGeneral } = generalSlice.actions;
+export const { setGeneral, removeFromGeneral } = generalSlice.actions;
 
 export default generalSlice.reducer;

@@ -6,8 +6,9 @@ interface Props {}
 
 function TextBox({}: Props): ReactElement {
   const [downloadLinkVisibility, setDownloadLinkVisibility] = useState(false);
-
   const generalData = useAppSelector((state) => state.general);
+  const generalKeys = Object.keys(generalData.data);
+  const generalStaticData = generalKeys.map((key) => `${key}=${generalData.data[key]}`);
 
   const generateFile = () => {
     const textField: any = document.querySelector("#text-field");
@@ -25,7 +26,7 @@ function TextBox({}: Props): ReactElement {
         readOnly
         cols={30}
         rows={10}
-        value={"general:" + generalData.priority}
+        value={generalStaticData.join("\n")}
       ></textarea>
       <button onClick={generateFile}>Generate</button>
       {/* eslint-disable jsx-a11y/anchor-is-valid */}
