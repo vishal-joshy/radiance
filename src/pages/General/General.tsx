@@ -3,9 +3,25 @@ import DropDown from "../../components/DropDown/DropDown";
 import { setGeneral, removeFromGeneral } from "../../store/general/generalSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
-interface Props {}
+const yesNoOption = ["default", "yes", "no"];
 
-function General({}: Props): ReactElement {
+const generalTemplate = {
+  priority: {
+    id: "priority",
+    options: ["default", "high", "abovenormal", "normal", "belownormal", "idle"],
+  },
+  keepOpen: {
+    id: "keep-open",
+    options: yesNoOption,
+  },
+  windowBorder: {
+    id: "border",
+    label: "Window Border",
+    options: yesNoOption,
+  },
+};
+
+function General(): ReactElement {
   const dispatch = useAppDispatch();
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -21,12 +37,23 @@ function General({}: Props): ReactElement {
   return (
     <div>
       <DropDown
-        id="priority"
-        values={["default", "high", "abovenormal"]}
+        id={generalTemplate.priority.id}
+        label={generalTemplate.priority.id}
+        values={generalTemplate.priority.options}
         handleChange={handleChange}
       />
-      <DropDown id="saveposition" values={["default", "No", "Yes"]} handleChange={handleChange} />
-      <DropDown id="keepopen" values={["default", "No", "Yes"]} handleChange={handleChange} />
+      <DropDown
+        id={generalTemplate.keepOpen.id}
+        label={generalTemplate.keepOpen.id}
+        values={generalTemplate.keepOpen.options}
+        handleChange={handleChange}
+      />
+      <DropDown
+        id={generalTemplate.windowBorder.id}
+        label={generalTemplate.windowBorder.label}
+        values={generalTemplate.windowBorder.options}
+        handleChange={handleChange}
+      />
     </div>
   );
 }
