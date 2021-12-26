@@ -1,15 +1,19 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement } from "react";
+import { Link } from "react-router-dom";
 
-interface Props {
-    
-}
+interface Props {}
 
 function Header({}: Props): ReactElement {
-    return (
-        <div>
-            Header
-        </div>
-    )
+  const logo = "RADIANCE";
+  return (
+    <div>
+      <h1>{logo}</h1>
+      <nav>
+        <Link to="/">General</Link>
+        <Link to="/video">Video</Link>
+      </nav>
+    </div>
+  );
 }
 
-export default Header
+export default Header;

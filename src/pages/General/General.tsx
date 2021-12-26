@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ReactElement, useState } from "react";
 import DropDown from "../../components/DropDown/DropDown";
+import Layout from "../../components/Layout";
 import { setGeneral, removeFromGeneral } from "../../store/general/generalSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
@@ -35,7 +36,7 @@ function General(): ReactElement {
   };
 
   return (
-    <div>
+    <Layout>
       <DropDown
         id={generalTemplate.priority.id}
         label={generalTemplate.priority.id}
@@ -54,7 +55,7 @@ function General(): ReactElement {
         values={generalTemplate.windowBorder.options}
         handleChange={handleChange}
       />
-    </div>
+    </Layout>
   );
 }
 

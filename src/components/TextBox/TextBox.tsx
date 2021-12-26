@@ -7,8 +7,11 @@ interface Props {}
 function TextBox({}: Props): ReactElement {
   const [downloadLinkVisibility, setDownloadLinkVisibility] = useState(false);
   const generalData = useAppSelector((state) => state.general);
+  const videoData = useAppSelector((state) => state.video);
   const generalKeys = Object.keys(generalData.data);
   const generalStaticData = generalKeys.map((key) => `${key}=${generalData.data[key]}`);
+  const videoKeys = Object.keys(videoData.data);
+  const videoStaticData = videoKeys.map((key) => `${key}=${videoData.data[key]}`);
 
   const generateFile = () => {
     const textField: any = document.querySelector("#text-field");
@@ -26,7 +29,7 @@ function TextBox({}: Props): ReactElement {
         readOnly
         cols={30}
         rows={10}
-        value={generalStaticData.join("\n")}
+        value={generalStaticData.join("\n") + videoStaticData.join("\n")}
       ></textarea>
       <button onClick={generateFile}>Generate</button>
       {/* eslint-disable jsx-a11y/anchor-is-valid */}
