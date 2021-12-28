@@ -9,14 +9,14 @@ interface Props {
 
 function DropDown({ id, values, label, handleChange }: Props): ReactElement {
   return (
-    <>
+    <div>
       <label htmlFor={id}>{label}</label>
       <select name={id} id={id} onChange={(e) => handleChange(e)}>
         {values.map((value) => (
           <option value={value}>{value}</option>
         ))}
       </select>
-    </>
+    </div>
   );
 }
 

@@ -9,15 +9,14 @@ interface Props {
 
 function Layout({ children }: Props): ReactElement {
   return (
-    <div>
+    <>
       <Header />
       <main>
         <TextBox />
-        {children}
+        <div>{children}</div>
       </main>
       <Footer />
-      
-    </div>
+    </>
   );
 }
 

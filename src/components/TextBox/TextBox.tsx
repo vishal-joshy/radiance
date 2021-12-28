@@ -13,6 +13,11 @@ function TextBox({}: Props): ReactElement {
   const videoKeys = Object.keys(videoData.data);
   const videoStaticData = videoKeys.map((key) => `${key}=${videoData.data[key]}`);
 
+  const staticText = {
+    downloadLink: "Download",
+    generate: "Generate",
+  };
+
   const generateFile = () => {
     const textField: any = document.querySelector("#text-field");
     const file = fileGen(textField.value, "text/plain");
@@ -27,20 +32,25 @@ function TextBox({}: Props): ReactElement {
         name="raw-data"
         id="text-field"
         readOnly
-        cols={30}
-        rows={10}
-        value={generalStaticData.join("\n") + videoStaticData.join("\n")}
+        cols={50}
+        rows={25}
+        value={generalStaticData.join("\n") + "\n" + videoStaticData.join("\n")}
       ></textarea>
-      <button onClick={generateFile}>Generate</button>
-      {/* eslint-disable jsx-a11y/anchor-is-valid */}
-      <a
-        href="#"
-        download={"mpv.conf"}
-        id="download-link"
-        style={downloadLinkVisibility ? { visibility: "visible" } : { visibility: "hidden" }}
-      >
-        Download
-      </a>
+      <div className="textButton">
+        <button className="textButton__generate" onClick={generateFile}>
+          {staticText.generate}
+        </button>
+        {/* eslint-disable jsx-a11y/anchor-is-valid */}
+        <a
+          className="textBUtton__download"
+          href="#"
+          download={"mpv.conf"}
+          id="download-link"
+          style={downloadLinkVisibility ? { visibility: "visible" } : { visibility: "hidden" }}
+        >
+          {staticText.downloadLink}
+        </a>
+      </div>
     </div>
   );
 }

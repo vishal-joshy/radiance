@@ -5,10 +5,15 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { removeFromVideo, setVideo } from "../../store/video/videoSlice";
 
 const videoTemplate = {
-  video: {
+  driver: {
     id: "vo",
     label: "Driver",
     options: ["default", "gpu", "gpu-hq", "direct3d", "vaapi", "caca"],
+  },
+  driverApi: {
+    id: "gui-api",
+    label: "Driver Api",
+    options: ["default", "opengl", "vulkan", "d3d11"],
   },
 };
 
@@ -28,9 +33,15 @@ function Video(): ReactElement {
   return (
     <Layout>
       <DropDown
-        id={videoTemplate.video.id}
-        label={videoTemplate.video.label}
-        values={videoTemplate.video.options}
+        id={videoTemplate.driver.id}
+        label={videoTemplate.driver.label}
+        values={videoTemplate.driver.options}
+        handleChange={handleChange}
+      />
+      <DropDown
+        id={videoTemplate.driverApi.id}
+        label={videoTemplate.driverApi.label}
+        values={videoTemplate.driverApi.options}
         handleChange={handleChange}
       />
     </Layout>
