@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import Layout from "./components/Layout";
 import General from "./pages/General/General";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Video from "./pages/Video/Video";

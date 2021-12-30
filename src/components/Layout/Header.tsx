@@ -1,31 +1,38 @@
 import React, { ReactElement } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-interface Props {}
-
-function Header({}: Props): ReactElement {
+function Header(): ReactElement {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/");
-  const logo = "RADIANCE";
+  const staticText = {
+    logo: "RADIANCE",
+    routes: [
+      { text: "General", routeName: "" },
+      { text: "Stream", routeName: "stream" },
+      { text: "Display", routeName: "display" },
+      { text: "Video", routeName: "video" },
+      { text: "Audio", routeName: "audio" },
+      { text: "Subtitles", routeName: "subtitles" },
+    ],
+  };
 
   return (
     <div className={styles.header}>
-      <h1 className={styles.logo}>{logo}</h1>
+      <h1 className={styles.logo}>{staticText.logo}</h1>
       <ul className={styles.ul}>
-        <li className={styles.li}>
-          <Link className={splitLocation[1] === "" ? styles.activeLink : styles.link} to="/">
-            General
-          </Link>
-        </li>
-        <li className={styles.li}>
-          <Link
-            className={splitLocation[1] === "video" ? styles.activeLink : styles.link}
-            to="/video"
-          >
-            Video
-          </Link>
-        </li>
+        {staticText.routes.map((route, index) => {
+          return (
+            <li key={index} className={styles.li}>
+              <Link
+                className={splitLocation[1] === route.routeName ? styles.activeLink : styles.link}
+                to={`/${route.routeName}`}
+              >
+                {route.text}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
