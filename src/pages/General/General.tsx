@@ -39,9 +39,14 @@ function General(): ReactElement {
 
   return (
     <Layout>
-      {generalTemplate.map(({ id, label, options }) => {
-        <DropDown id={id} label={label} values={options} handleChange={handleChange} />;
-      })}
+      {generalTemplate.map(({ id, label, options }) => (
+        <DropDown
+          id={id}
+          label={label}
+          values={options}
+          handleChange={handleChange}
+        />
+      ))}
     </Layout>
   );
 }
