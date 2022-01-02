@@ -6,21 +6,23 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const yesNoOption = ["default", "yes", "no"];
 
-const generalTemplate = {
-  priority: {
+const generalTemplate = [
+  {
     id: "priority",
+    label: "Priority",
     options: ["default", "high", "abovenormal", "normal", "belownormal", "idle"],
   },
-  keepOpen: {
+  {
     id: "keep-open",
+    label: "Keep Open",
     options: yesNoOption,
   },
-  windowBorder: {
+  {
     id: "border",
     label: "Window Border",
     options: yesNoOption,
   },
-};
+];
 
 function General(): ReactElement {
   const dispatch = useAppDispatch();
@@ -37,24 +39,9 @@ function General(): ReactElement {
 
   return (
     <Layout>
-      <DropDown
-        id={generalTemplate.priority.id}
-        label={generalTemplate.priority.id}
-        values={generalTemplate.priority.options}
-        handleChange={handleChange}
-      />
-      <DropDown
-        id={generalTemplate.keepOpen.id}
-        label={generalTemplate.keepOpen.id}
-        values={generalTemplate.keepOpen.options}
-        handleChange={handleChange}
-      />
-      <DropDown
-        id={generalTemplate.windowBorder.id}
-        label={generalTemplate.windowBorder.label}
-        values={generalTemplate.windowBorder.options}
-        handleChange={handleChange}
-      />
+      {generalTemplate.map(({ id, label, options }) => {
+        <DropDown id={id} label={label} values={options} handleChange={handleChange} />;
+      })}
     </Layout>
   );
 }
