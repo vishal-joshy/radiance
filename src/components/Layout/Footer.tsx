@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import Layout from ".";
 
 interface Props {}
 
