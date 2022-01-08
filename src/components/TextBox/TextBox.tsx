@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from "react";
-import { useAppSelector } from "../../store/hooks";
-import { fileGen } from "@utilities/fileGen";
+import { useAppSelector } from "store/hooks";
+import { fileGen } from "utilities/fileGen";
 
 interface Props {}
 

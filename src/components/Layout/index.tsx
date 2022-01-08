@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import TextBox from "@components/TextBox/TextBox";
+import TextBox from "components/TextBox/TextBox";
 
 interface Props {
   children: ReactNode;

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, ReactElement } from "react";
-import DropDown from "@components/DropDown/DropDown";
-import Layout from "@components/Layout";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { removeFromVideo, setVideo } from "@store/video/videoSlice";
+import DropDown from "components/DropDown/DropDown";
+import Layout from "components/Layout";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { removeFromVideo, setVideo } from "store/video/videoSlice";
 
 const videoTemplate = {
   driver: {
