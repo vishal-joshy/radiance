@@ -3,27 +3,7 @@ import DropDown from "components/DropDown/DropDown";
 import Layout from "components/Layout";
 import { setGeneral, removeFromGeneral } from "store/general/generalSlice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-
-
-const yesNoOption = ["default", "yes", "no"];
-
-const generalTemplate = [
-  {
-    id: "priority",
-    label: "Priority",
-    options: ["default", "high", "abovenormal", "normal", "belownormal", "idle"],
-  },
-  {
-    id: "keep-open",
-    label: "Keep Open",
-    options: yesNoOption,
-  },
-  {
-    id: "border",
-    label: "Window Border",
-    options: yesNoOption,
-  },
-];
+import { generalData } from "data/general";
 
 function General(): ReactElement {
   const dispatch = useAppDispatch();
@@ -40,13 +20,8 @@ function General(): ReactElement {
 
   return (
     <Layout>
-      {generalTemplate.map(({ id, label, options }) => (
-        <DropDown
-          id={id}
-          label={label}
-          values={options}
-          handleChange={handleChange}
-        />
+      {generalData.map(({ id, label, options }) => (
+        <DropDown key={id} id={id} label={label} values={options} handleChange={handleChange} />
       ))}
     </Layout>
   );
