@@ -1,27 +1,54 @@
-import React, { ChangeEvent, ReactElement, useState } from "react";
+import React, { ChangeEvent, ReactElement } from "react";
 import DropDown from "components/DropDown/DropDown";
 import Layout from "components/Layout";
 import { setGeneral, removeFromGeneral } from "store/general/generalSlice";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { generalData } from "data/general";
+import { useAppDispatch } from "store/hooks";
+import * as generalData from "data/general";
+import DoubleSlider from "components/Slider/DoubleSlider";
 
 function General(): ReactElement {
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const createKeyPair = (key: string, value: string | number) => {
+    const result: any = {};
+    result[key] = value;
+    return result;
+  };
+
+  const handleDropdown = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === "default") {
       dispatch(removeFromGeneral(e.target.id));
     } else {
-      const result: any = {};
-      result[e.target.id] = e.target.value;
+      const result = createKeyPair(e.target.id, e.target.value);
       dispatch(setGeneral(result));
+    }
+  };
+
+  const handleDoubleSlider = ({ id, firstSliderValue, secondSliderValue, getValue }: any) => {
+    if (firstSliderValue && secondSliderValue) {
+      const value = getValue(firstSliderValue, secondSliderValue);
+      const result = createKeyPair(id, value);
+      dispatch(setGeneral(result));
+    } else {
+      dispatch(removeFromGeneral(id));
     }
   };
 
   return (
     <Layout>
-      {generalData.map(({ id, label, options }) => (
-        <DropDown key={id} id={id} label={label} values={options} handleChange={handleChange} />
+      {generalData.dropdown.map(({ id, label, options }) => (
+        <DropDown key={id} id={id} label={label} values={options} handleChange={handleDropdown} />
+      ))}
+
+      {generalData.doubleSlider.map(({ id, firstLabel, secondLabel, getValue }) => (
+        <DoubleSlider
+          key={id}
+          labelOne={firstLabel}
+          labelTwo={secondLabel}
+          id={id}
+          getValue={getValue}
+          handleChange={handleDoubleSlider}
+        />
       ))}
     </Layout>
   );

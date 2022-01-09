@@ -1,21 +1,29 @@
 import React, { ReactElement, useState, useEffect } from "react";
 
 interface Props {
-  label: String;
-  handleChange(valueOne: number, valueTwo: number): void;
+  labelOne: String;
+  labelTwo: string;
+  id: String;
+  handleChange({ id, firstSliderValue, secondSliderValue, getValue }: any): void;
+  getValue(firstValue: number, secondValue: number): string;
 }
 
-function DoubleSlider({ label, handleChange }: Props): ReactElement {
+function DoubleSlider({ id, labelOne, labelTwo, handleChange, getValue }: Props): ReactElement {
   const [sliderValueOne, setSliderValueOne] = useState(0);
   const [sliderValueTwo, setSliderValueTwo] = useState(0);
 
   useEffect(() => {
-    handleChange(sliderValueOne, sliderValueTwo);
+    handleChange({
+      firstSliderValue: sliderValueOne,
+      secondSliderValue: sliderValueTwo,
+      id,
+      getValue,
+    });
   }, [sliderValueTwo, sliderValueOne]);
 
   return (
     <div>
-      <label htmlFor="">{label}</label>
+      <label htmlFor="">{labelOne}</label>
       <input
         type="range"
         min={0}
@@ -28,7 +36,7 @@ function DoubleSlider({ label, handleChange }: Props): ReactElement {
         value={sliderValueOne}
         onChange={({ target }) => setSliderValueOne(parseInt(target.value))}
       />
-      <label htmlFor="">{label}</label>
+      <label htmlFor="">{labelTwo}</label>
       <input
         type="range"
         min={0}

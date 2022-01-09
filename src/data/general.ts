@@ -18,4 +18,23 @@ const dropdown = [
   },
 ];
 
-export {dropdown as generalData};
+const doubleSlider = [
+  {
+    firstLabel: "Geometry X",
+    secondLabel: "Geometry Y",
+    id: "geometry",
+    getValue: function (firstValue: number, secondValue: number) {
+      return `${firstValue}%:${secondValue}%`;
+    },
+  },
+  {
+    firstLabel: "Autofit Width",
+    secondLabel: "Autofit Height",
+    id: "autofit-larger",
+    getValue: function (firstValue: number, secondValue: number) {
+      return `${firstValue}%x${secondValue}%`;
+    },
+  },
+];
+
+export {dropdown,doubleSlider};
