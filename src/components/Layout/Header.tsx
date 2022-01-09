@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { Link, useLocation } from "react-router-dom";
+import {separateSlash} from 'utilities/string';
 
 function Header(): ReactElement {
   const location = useLocation();
@@ -8,14 +9,15 @@ function Header(): ReactElement {
   const staticText = {
     logo: "RADIANCE",
     routes: [
-      { text: "General", routeName: "" },
-      { text: "Stream", routeName: "stream" },
-      { text: "Display", routeName: "display" },
-      { text: "Video", routeName: "video" },
-      { text: "Audio", routeName: "audio" },
-      { text: "Subtitles", routeName: "subtitles" },
+      { text: "General", route: "/" },
+      { text: "Stream", route: "/stream" },
+      { text: "Display", route: "/display" },
+      { text: "Video", route: "/video" },
+      { text: "Audio", route: "/audio" },
+      { text: "Subtitles", route: "/subtitles" },
     ],
   };
+
 
   return (
     <div className={styles.header}>
@@ -25,8 +27,8 @@ function Header(): ReactElement {
           return (
             <li key={index} className={styles.li}>
               <Link
-                className={splitLocation[1] === route.routeName ? styles.activeLink : styles.link}
-                to={`/${route.routeName}`}
+                className={splitLocation[1] === separateSlash(route.route) ? styles.activeLink : styles.link}
+                to={route.route}
               >
                 {route.text}
               </Link>
