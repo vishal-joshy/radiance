@@ -9,15 +9,19 @@ interface Props {
 
 function DropDown({ id, values, label, handleChange }: Props): ReactElement {
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
-      <select name={id} id={id} onChange={(e) => handleChange(e)}>
-        {values.map((value) => (
-          <option value={value}>{value}</option>
+    <div className={style.container}>
+      <label  htmlFor={id}>{label}</label>
+      <select className={style.select} name={id} id={id} onChange={(e) => handleChange(e)}>
+        {values.map((value,index) => (
+          <option key={index} value={value}>{value}</option>
         ))}
       </select>
     </div>
   );
+}
+const style={
+  container:"flex justify-between p-2 2-80",
+  select:"w-40 ml-6 bg-white border"
 }
 
 export default DropDown;
