@@ -9,7 +9,7 @@ function Video(): ReactElement {
   const dispatch = useAppDispatch();
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === "default") {
+    if (e.target.value === "") {
       dispatch(removeFromVideo(e.target.id));
     } else {
       const result: any = {};
@@ -21,7 +21,7 @@ function Video(): ReactElement {
   return (
     <Layout>
       {videoData.map(({id,label,options}) => (
-          <DropDown key={id} id={id} label={label} values={options} handleChange={handleChange} />
+          <DropDown key={id} id={id} label={label} options={options} handleChange={handleChange} />
       ))}
     </Layout>
   );

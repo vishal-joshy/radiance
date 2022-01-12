@@ -2,12 +2,19 @@ const dropdown = [
   {
     id: "vo",
     label: "Driver",
-    options: ["default", "gpu", "gpu-hq", "direct3d", "vaapi", "caca"],
+    options: {
+      default: "",
+      gpu: "gpu",
+      "gpu-hq": "gpu-hq",
+      direct3d: "direct3d",
+      vappi: "vaapi",
+      caca: "caca",
+    },
   },
   {
     id: "gui-api",
     label: "Driver Api",
-    options: ["default", "opengl", "vulkan", "d3d11"],
+    options: { default: "", opengl: "opengl", vulkan: "vulkan", d3d11: "d3d11" },
   },
 ];
 

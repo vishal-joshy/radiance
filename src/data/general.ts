@@ -1,10 +1,17 @@
-const yesNoOption = ["default", "yes", "no"];
+const yesNoOption = { default: "", yes: "yes", no: "no" };
 
 const dropdown = [
   {
     id: "priority",
     label: "Priority",
-    options: ["default", "high", "abovenormal", "normal", "belownormal", "idle"],
+    options: {
+      default: "",
+      high: "high",
+      abovenormal: "abovenormal",
+      normal: "normal",
+      belownormal: "belownormal",
+      idle: "idle",
+    },
   },
   {
     id: "keep-open",
@@ -15,6 +22,11 @@ const dropdown = [
     id: "border",
     label: "Window Border",
     options: yesNoOption,
+  },
+  {
+    id: "title",
+    label: "Window Title",
+    options: { default: "", Filename: "${filename}", MediaTitle: "${media-title}" },
   },
 ];
 
@@ -37,4 +49,4 @@ const doubleSlider = [
   },
 ];
 
-export {dropdown,doubleSlider};
+export { dropdown, doubleSlider };

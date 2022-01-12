@@ -16,7 +16,7 @@ function General(): ReactElement {
   };
 
   const handleDropdown = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === "default") {
+    if (e.target.value === "") {
       dispatch(removeFromGeneral(e.target.id));
     } else {
       const result = createKeyPair(e.target.id, e.target.value);
@@ -37,7 +37,7 @@ function General(): ReactElement {
   return (
     <Layout>
       {generalData.dropdown.map(({ id, label, options }) => (
-        <DropDown key={id} id={id} label={label} values={options} handleChange={handleDropdown} />
+        <DropDown key={id} id={id} label={label} options={options} handleChange={handleDropdown} />
       ))}
 
       {generalData.doubleSlider.map(({ id, firstLabel, secondLabel, getValue }) => (
