@@ -1,9 +1,10 @@
 import React, { ReactElement, useState, useEffect } from "react";
+import Slider from "./Slider";
 
 interface Props {
-  labelOne: String;
+  labelOne: string;
   labelTwo: string;
-  id: String;
+  id: string;
   handleChange({ id, firstSliderValue, secondSliderValue, getValue }: any): void;
   getValue(firstValue: number, secondValue: number): string;
 }
@@ -22,54 +23,19 @@ function DoubleSlider({ id, labelOne, labelTwo, handleChange, getValue }: Props)
   }, [sliderValueTwo, sliderValueOne]);
 
   return (
-    <div >
-      <div className={style.sliderContainer}>
-      <label htmlFor="">{labelOne}</label>
-      <div>
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={sliderValueOne}
-        onChange={({ target }) => setSliderValueOne(parseInt(target.value))}
+    <div>
+      <Slider
+        label={labelOne}
+        sliderValue={sliderValueOne}
+        handleSlider={(value: any) => setSliderValueOne(value)}
       />
-      <input
-        className={style.textInput}
-        type="number"
-        max={100}
-        min={0}
-        value={sliderValueOne}
-        onChange={({ target }) => setSliderValueOne(parseInt(target.value))}
+      <Slider
+        label={labelTwo}
+        sliderValue={sliderValueTwo}
+        handleSlider={(value: any) => setSliderValueTwo(value)}
       />
-      </div>
-      </div>
-      <div className={style.sliderContainer}>
-      <label htmlFor="">{labelTwo}</label>
-      <div>
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={sliderValueTwo}
-        onChange={({ target }) => setSliderValueTwo(parseInt(target.value))}
-      />
-      <input
-        className={style.textInput}
-        type="number"
-        max={100}
-        min={0}
-        value={sliderValueTwo}
-        onChange={({ target }) => setSliderValueTwo(parseInt(target.value))}
-      />
-      </div>
-      </div>
     </div>
   );
-}
-
-const style={
-  sliderContainer:"flex justify-between p-2 2-80",
-  textInput:'w-10'
 }
 
 export default DoubleSlider;
