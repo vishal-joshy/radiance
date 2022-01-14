@@ -49,4 +49,21 @@ const doubleSlider = [
   },
 ];
 
-export { dropdown, doubleSlider };
+const miscData = [
+  {
+    id: "save-position",
+    label: "Save Position",
+    options: { default: "", yes: "save-position-on-quit", no: "" },
+  },
+  {
+    id: "on-top",
+    label: "On Top",
+    options: { default: "", yes: "ontop", no: "" },
+  },
+  {
+    id: "screensaver",
+    label: "Screensaver",
+    options: { default: "", on: "no-stop-screensaver", off: "stop-screensaver" },
+  },
+];
+export { dropdown, doubleSlider, miscData };

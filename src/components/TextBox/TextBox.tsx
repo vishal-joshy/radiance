@@ -4,14 +4,19 @@ import { fileGen } from "utilities/fileGen";
 
 interface Props {}
 
+const getStringValue = (data:any,callback:any)=>{
+    const keys = Object.keys(data);
+    return keys.map(callback).join("\n");
+}
+
 function TextBox({}: Props): ReactElement {
   const [downloadLinkVisibility, setDownloadLinkVisibility] = useState(false);
   const generalData = useAppSelector((state) => state.general);
   const videoData = useAppSelector((state) => state.video);
-  const generalKeys = Object.keys(generalData.data);
-  const generalStaticData = generalKeys.map((key) => `${key}=${generalData.data[key]}`);
-  const videoKeys = Object.keys(videoData.data);
-  const videoStaticData = videoKeys.map((key) => `${key}=${videoData.data[key]}`);
+
+  const generalMainData= getStringValue(generalData.main,((key:any) => `${key}=${generalData.main[key]}`))
+  const generalMiscData= getStringValue(generalData.misc,((key:any) => generalData.misc[key]))
+  const videoMainData= getStringValue(videoData.main,((key:any) => `${key}=${videoData.main[key]}`))
 
   const staticText = {
     downloadLink: "Download",
@@ -34,7 +39,13 @@ function TextBox({}: Props): ReactElement {
         readOnly
         cols={50}
         rows={25}
-        value={generalStaticData.join("\n") + "\n" + videoStaticData.join("\n")}
+        value={
+          generalMainData +
+          "\n" +
+          generalMiscData +
+          "\n" +
+          videoMainData
+        }
       ></textarea>
       <div className="textButton">
         <button className="textButton__generate" onClick={generateFile}>

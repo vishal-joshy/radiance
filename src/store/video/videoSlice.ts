@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface VideoSlice {
-  data: any;
+  main:any;
+  misc:any;
 }
 
 const initialState: VideoSlice = {
-  data: {},
+  main:{},
+  misc:{}
 };
 
 export const videoSlice = createSlice({
@@ -13,13 +15,13 @@ export const videoSlice = createSlice({
   initialState,
   reducers: {
     setVideo: (state, action: PayloadAction<null | any>) => {
-      state.data = { ...state.data, ...action.payload };
+      state.main = { ...state.main, ...action.payload };
     },
     removeFromVideo: (state, action: PayloadAction<null | any>) => {
       const key = action.payload;
-      const result = { ...state.data };
+      const result = { ...state.main };
       delete result[key];
-      state.data = result;
+      state.main = result;
     },
   },
 });
