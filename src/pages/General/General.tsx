@@ -10,15 +10,10 @@ import {
 import { useAppDispatch } from "store/hooks";
 import * as generalData from "data/general";
 import DoubleSlider from "components/Slider/DoubleSlider";
+import { createKeyPair } from "utilities/string";
 
 function General(): ReactElement {
   const dispatch = useAppDispatch();
-
-  const createKeyPair = (key: string, value: string | number) => {
-    const result: any = {};
-    result[key] = value;
-    return result;
-  };
 
   const handleDropdown = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === "") {

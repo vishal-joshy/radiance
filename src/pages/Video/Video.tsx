@@ -4,6 +4,7 @@ import Layout from "components/Layout";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { removeFromVideo, setVideo } from "store/video/videoSlice";
 import { videoData } from "data/video";
+import { createKeyPair } from "utilities/string";
 
 function Video(): ReactElement {
   const dispatch = useAppDispatch();
@@ -12,16 +13,15 @@ function Video(): ReactElement {
     if (e.target.value === "") {
       dispatch(removeFromVideo(e.target.id));
     } else {
-      const result: any = {};
-      result[e.target.id] = e.target.value;
+      const result = createKeyPair(e.target.id, e.target.value);
       dispatch(setVideo(result));
     }
   };
 
   return (
     <Layout>
-      {videoData.map(({id,label,options}) => (
-          <DropDown key={id} id={id} label={label} options={options} handleChange={handleChange} />
+      {videoData.map(({ id, label, options }) => (
+        <DropDown key={id} id={id} label={label} options={options} handleChange={handleChange} />
       ))}
     </Layout>
   );
