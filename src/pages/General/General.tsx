@@ -11,12 +11,13 @@ import { useAppDispatch } from "store/hooks";
 import * as generalData from "data/general";
 import DoubleSlider from "components/Slider/DoubleSlider";
 import { createKeyPair } from "utilities/string";
+import TextInput from 'components/TextInput/TextInput';
 
 function General(): ReactElement {
   const dispatch = useAppDispatch();
 
   const handleDropdown = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === "") {
+    if (e.target.value === '') {
       dispatch(removeFromGeneral(e.target.id));
     } else {
       const result = createKeyPair(e.target.id, e.target.value);
@@ -35,7 +36,7 @@ function General(): ReactElement {
   };
 
   const handleDropdownMisc = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === "") {
+    if (e.target.value === '') {
       dispatch(removeFromGeneralMisc(e.target.id));
     } else {
       const result = createKeyPair(e.target.id, e.target.value);
@@ -48,7 +49,6 @@ function General(): ReactElement {
       {generalData.dropdown.map(({ id, label, options }) => (
         <DropDown key={id} id={id} label={label} options={options} handleChange={handleDropdown} />
       ))}
-
       {generalData.miscData.map(({ id, label, options }) => (
         <DropDown
           key={id}
@@ -58,7 +58,6 @@ function General(): ReactElement {
           handleChange={handleDropdownMisc}
         />
       ))}
-
       {generalData.doubleSlider.map(({ id, firstLabel, secondLabel, getValue }) => (
         <DoubleSlider
           key={id}
@@ -69,6 +68,11 @@ function General(): ReactElement {
           handleChange={handleDoubleSlider}
         />
       ))}
+      <h5>Screenshot</h5>
+      <TextInput
+        label={generalData.screenShot.textInput.label}
+        id={generalData.screenShot.textInput.id}
+      />
     </Layout>
   );
 }

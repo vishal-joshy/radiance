@@ -66,4 +66,10 @@ const miscData = [
     options: { default: "", on: "no-stop-screensaver", off: "stop-screensaver" },
   },
 ];
-export { dropdown, doubleSlider, miscData };
+const screenShot = {
+  textInput: {
+    id: 'screenshot-directory',
+    label: 'Path',
+  },
+};
+export { dropdown, doubleSlider, miscData, screenShot };
