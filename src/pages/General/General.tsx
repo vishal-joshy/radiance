@@ -1,16 +1,16 @@
-import React, { ChangeEvent, ReactElement } from "react";
-import DropDown from "components/DropDown/DropDown";
-import Layout from "components/Layout";
+import React, { ChangeEvent, ReactElement } from 'react';
+import DropDown from 'components/DropDown/DropDown';
+import Layout from 'components/Layout';
 import {
   setGeneral,
   removeFromGeneral,
   setGeneralMisc,
   removeFromGeneralMisc,
-} from "store/general/generalSlice";
-import { useAppDispatch } from "store/hooks";
-import * as generalData from "data/general";
-import DoubleSlider from "components/Slider/DoubleSlider";
-import { createKeyPair } from "utilities/string";
+} from 'store/general/generalSlice';
+import { useAppDispatch } from 'store/hooks';
+import * as generalData from 'data/general';
+import DoubleSlider from 'components/Slider/DoubleSlider';
+import { createKeyPair } from 'utilities/string';
 import TextInput from 'components/TextInput/TextInput';
 
 function General(): ReactElement {
@@ -73,6 +73,9 @@ function General(): ReactElement {
         label={generalData.screenShot.textInput.label}
         id={generalData.screenShot.textInput.id}
       />
+      {generalData.screenShot.dropdown.map(({ id, label, options }) => (
+        <DropDown key={id} id={id} label={label} options={options} handleChange={handleDropdown} />
+      ))}
     </Layout>
   );
 }
