@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement } from 'react';
 
 interface Props {
   label: string;
-  sliderValue: number;
+  sliderValue?: number;
   handleSlider: any;
 }
 
@@ -10,10 +10,10 @@ function Slider({ label, sliderValue, handleSlider }: Props): ReactElement {
   return (
     <div>
       <div className={style.sliderContainer}>
-        <label htmlFor="">{label}</label>
+        <label htmlFor=''>{label}</label>
         <div>
           <input
-            type="range"
+            type='range'
             min={0}
             max={100}
             value={sliderValue}
@@ -21,7 +21,7 @@ function Slider({ label, sliderValue, handleSlider }: Props): ReactElement {
           />
           <input
             className={style.textInput}
-            type="number"
+            type='number'
             max={100}
             min={0}
             value={sliderValue}
@@ -34,8 +34,8 @@ function Slider({ label, sliderValue, handleSlider }: Props): ReactElement {
 }
 
 const style = {
-  sliderContainer: "flex justify-between p-2 2-80",
-  textInput: "w-10",
+  sliderContainer: 'flex justify-between p-2 2-80',
+  textInput: 'w-10',
 };
 
 export default Slider;

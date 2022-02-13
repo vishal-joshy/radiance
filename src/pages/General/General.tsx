@@ -12,12 +12,13 @@ import * as generalData from 'data/general';
 import DoubleSlider from 'components/Slider/DoubleSlider';
 import { createKeyPair } from 'utilities/string';
 import TextInput from 'components/TextInput/TextInput';
+import ScreenshotFormat from 'components/GeneralComponents/ScreenshotFormat';
 
 function General(): ReactElement {
   const dispatch = useAppDispatch();
 
   const handleDropdown = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === '') {
+    if (!e.target.value) {
       dispatch(removeFromGeneral(e.target.id));
     } else {
       const result = createKeyPair(e.target.id, e.target.value);
@@ -41,6 +42,21 @@ function General(): ReactElement {
     } else {
       const result = createKeyPair(e.target.id, e.target.value);
       dispatch(setGeneralMisc(result));
+    }
+  };
+
+  const handleScreenshotQuality = ({ dropdownId, dropdownValue, sliderId, sliderValue }: any) => {
+    const dropdownData = createKeyPair(dropdownId, dropdownValue);
+    const sliderData = createKeyPair(sliderId, sliderValue);
+    dispatch(removeFromGeneral('screenshot-jpg-quality'));
+    dispatch(removeFromGeneral('screenshot-jpeg-quality'));
+    dispatch(removeFromGeneral('screenshot-png-compression'));
+    if (!dropdownValue) {
+      dispatch(removeFromGeneral(dropdownId));
+      dispatch(removeFromGeneral(sliderId));
+    } else {
+      dispatch(setGeneral(dropdownData));
+      dispatch(setGeneral(sliderData));
     }
   };
 
@@ -76,6 +92,8 @@ function General(): ReactElement {
       {generalData.screenShot.dropdown.map(({ id, label, options }) => (
         <DropDown key={id} id={id} label={label} options={options} handleChange={handleDropdown} />
       ))}
+
+      <ScreenshotFormat handleChange={handleScreenshotQuality} />
     </Layout>
   );
 }
