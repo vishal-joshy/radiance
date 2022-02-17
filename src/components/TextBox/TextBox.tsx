@@ -1,12 +1,13 @@
-import React, { ReactElement, useState } from "react";
-import { useAppSelector } from "store/hooks";
-import { fileGen } from "utilities/fileGen";
-import { getStringValue } from "utilities/string";
+import React, { ReactElement, useState } from 'react';
+import { useAppSelector } from 'store/hooks';
+import { fileGen } from 'utilities/fileGen';
+import { getStringValue } from 'utilities/string';
 
 function TextBox(): ReactElement {
   const [downloadLinkVisibility, setDownloadLinkVisibility] = useState(false);
   const generalData = useAppSelector((state) => state.general);
   const videoData = useAppSelector((state) => state.video);
+  const audioData = useAppSelector((state) => state.audio);
 
   const generalMainData = getStringValue(
     generalData.main,
@@ -17,16 +18,20 @@ function TextBox(): ReactElement {
     videoData.main,
     (key: any) => `${key}=${videoData.main[key]}`
   );
+  const audioMainData = getStringValue(
+    audioData.main,
+    (key: any) => `${key}=${audioData.main[key]}`
+  );
 
   const staticText = {
-    downloadLink: "Download",
-    generate: "Generate",
+    downloadLink: 'Download',
+    generate: 'Generate',
   };
 
   const generateFile = () => {
-    const textField: any = document.querySelector("#text-field");
-    const file = fileGen(textField.value, "text/plain");
-    const downloadLink: any = document.querySelector("#download-link");
+    const textField: any = document.querySelector('#text-field');
+    const file = fileGen(textField.value, 'text/plain');
+    const downloadLink: any = document.querySelector('#download-link');
     downloadLink.href = URL.createObjectURL(file);
     setDownloadLinkVisibility(true);
   };
@@ -34,25 +39,25 @@ function TextBox(): ReactElement {
   return (
     <div>
       <textarea
-        name="raw-data"
-        id="text-field"
+        name='raw-data'
+        id='text-field'
         readOnly
         cols={50}
         rows={25}
-        value={generalMainData + "\n" + generalMiscData + "\n" + videoMainData}
-      ></textarea>
-      <div className="textButton">
-        <button className="textButton__generate" onClick={generateFile}>
+        value={
+          generalMainData + '\n' + generalMiscData + '\n' + videoMainData + '\n' + audioMainData
+        }></textarea>
+      <div className='textButton'>
+        <button className='textButton__generate' onClick={generateFile}>
           {staticText.generate}
         </button>
         {/* eslint-disable jsx-a11y/anchor-is-valid */}
         <a
-          className="textBUtton__download"
-          href="#"
-          download={"mpv.conf"}
-          id="download-link"
-          style={downloadLinkVisibility ? { visibility: "visible" } : { visibility: "hidden" }}
-        >
+          className='textBUtton__download'
+          href='#'
+          download={'mpv.conf'}
+          id='download-link'
+          style={downloadLinkVisibility ? { visibility: 'visible' } : { visibility: 'hidden' }}>
           {staticText.downloadLink}
         </a>
       </div>
