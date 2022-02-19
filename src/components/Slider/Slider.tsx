@@ -2,11 +2,21 @@ import React, { ReactElement } from 'react';
 
 interface Props {
   label: string;
-  sliderValue?: number;
+  sliderValue?: any;
   handleSlider: any;
+  min?: number;
+  max?: number;
+  defaultValue?: number;
 }
 
-function Slider({ label, sliderValue, handleSlider }: Props): ReactElement {
+function Slider({
+  label,
+  sliderValue,
+  handleSlider,
+  min = 0,
+  max = 100,
+  defaultValue,
+}: Props): ReactElement {
   return (
     <div>
       <div className={style.sliderContainer}>
@@ -14,17 +24,17 @@ function Slider({ label, sliderValue, handleSlider }: Props): ReactElement {
         <div>
           <input
             type='range'
-            min={0}
-            max={100}
-            value={sliderValue}
+            min={min}
+            max={max}
+            value={sliderValue || defaultValue}
             onChange={({ target }) => handleSlider(parseInt(target.value))}
           />
           <input
             className={style.textInput}
             type='number'
-            max={100}
-            min={0}
-            value={sliderValue}
+            max={max}
+            min={min}
+            value={sliderValue || defaultValue}
             onChange={({ target }) => handleSlider(parseInt(target.value))}
           />
         </div>

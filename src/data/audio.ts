@@ -58,4 +58,18 @@ const dropdown = [
   },
 ];
 
-export { dropdown };
+const slider = [
+  {
+    id: 'volume',
+    label: 'Volume',
+    defaultValue: 100,
+  },
+  {
+    id: 'volume-max',
+    label: 'VolumeMax',
+    max: 200,
+    defaultValue: 100,
+  },
+];
+
+export { dropdown, slider };
