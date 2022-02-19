@@ -15,7 +15,7 @@ function Slider({
   handleSlider,
   min = 0,
   max = 100,
-  defaultValue,
+  defaultValue = 0,
 }: Props): ReactElement {
   return (
     <div>
