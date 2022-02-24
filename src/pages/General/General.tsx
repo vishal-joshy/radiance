@@ -48,9 +48,12 @@ function General(): ReactElement {
   const handleScreenshotQuality = ({ dropdownId, dropdownValue, sliderId, sliderValue }: any) => {
     const dropdownData = createKeyPair(dropdownId, dropdownValue);
     const sliderData = createKeyPair(sliderId, sliderValue);
-    dispatch(removeFromGeneral('screenshot-jpg-quality'));
-    dispatch(removeFromGeneral('screenshot-jpeg-quality'));
-    dispatch(removeFromGeneral('screenshot-png-compression'));
+    const resetValues = () => {
+      dispatch(removeFromGeneral('screenshot-jpg-quality'));
+      dispatch(removeFromGeneral('screenshot-jpeg-quality'));
+      dispatch(removeFromGeneral('screenshot-png-compression'));
+    };
+    resetValues();
     if (!dropdownValue) {
       dispatch(removeFromGeneral(dropdownId));
       dispatch(removeFromGeneral(sliderId));
@@ -60,42 +63,51 @@ function General(): ReactElement {
     }
   };
 
+  const createComponent = ({ dataList, ArgComponent, handlerFunction }: any) =>
+    dataList.map((data: any) => (
+      <React.Fragment key={data.id}>
+        <ArgComponent {...data} handleChange={handlerFunction} />
+      </React.Fragment>
+    ));
+
+  const dropdownOptions = createComponent({
+    dataList: generalData.dropdown,
+    ArgComponent: DropDown,
+    handlerFunction: handleDropdown,
+  });
+
+  const sliderOptions = createComponent({
+    dataList: generalData.doubleSlider,
+    ArgComponent: DoubleSlider,
+    handlerFunction: handleDoubleSlider,
+  });
+
+  const miscDropdownOptions = createComponent({
+    dataList: generalData.miscData,
+    ArgComponent: DropDown,
+    handlerFunction: handleDropdownMisc,
+  });
+
   return (
     <Layout>
-      {generalData.dropdown.map(({ id, label, options }) => (
-        <DropDown key={id} id={id} label={label} options={options} handleChange={handleDropdown} />
-      ))}
-      {generalData.miscData.map(({ id, label, options }) => (
-        <DropDown
-          key={id}
-          id={id}
-          label={label}
-          options={options}
-          handleChange={handleDropdownMisc}
-        />
-      ))}
-      {generalData.doubleSlider.map(({ id, firstLabel, secondLabel, getValue }) => (
-        <DoubleSlider
-          key={id}
-          labelOne={firstLabel}
-          labelTwo={secondLabel}
-          id={id}
-          getValue={getValue}
-          handleChange={handleDoubleSlider}
-        />
-      ))}
-      <h5>Screenshot</h5>
-      <TextInput
-        label={generalData.screenShot.textInput.label}
-        id={generalData.screenShot.textInput.id}
-      />
-      {generalData.screenShot.dropdown.map(({ id, label, options }) => (
-        <DropDown key={id} id={id} label={label} options={options} handleChange={handleDropdown} />
-      ))}
-
-      <ScreenshotFormat handleChange={handleScreenshotQuality} />
+      {dropdownOptions}
+      {miscDropdownOptions}
+      {sliderOptions}
+      <ScreenShotOptions {...{ handleScreenshotQuality, handleDropdown }} /> 
     </Layout>
   );
 }
+
+const ScreenShotOptions = ({ handleScreenshotQuality, handleDropdown }: any) => (
+  <>
+    <h5>Screenshot</h5>
+    <TextInput {...generalData.screenShot.textInput} />
+    {generalData.screenShot.dropdown.map((data) => (
+      <DropDown key={data.id} {...data} handleChange={handleDropdown} />
+    ))}
+
+    <ScreenshotFormat handleChange={handleScreenshotQuality} />
+  </>
+);
 
 export default General;
