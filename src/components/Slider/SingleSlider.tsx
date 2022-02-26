@@ -22,6 +22,7 @@ function SingleSlider({
     handleChange({
       sliderValue,
       id,
+      defaultValue,
     });
   }, [sliderValue]);
 

@@ -14,6 +14,13 @@ import { createKeyPair } from 'utilities/string';
 import TextInput from 'components/TextInput/TextInput';
 import ScreenshotFormat from 'components/GeneralComponents/ScreenshotFormat';
 
+const createComponent = ({ dataList, ArgComponent, handlerFunction }: any) =>
+  dataList.map((data: any) => (
+    <React.Fragment key={data.id}>
+      <ArgComponent {...data} handleChange={handlerFunction} />
+    </React.Fragment>
+  ));
+
 function General(): ReactElement {
   const dispatch = useAppDispatch();
 
@@ -63,13 +70,6 @@ function General(): ReactElement {
     }
   };
 
-  const createComponent = ({ dataList, ArgComponent, handlerFunction }: any) =>
-    dataList.map((data: any) => (
-      <React.Fragment key={data.id}>
-        <ArgComponent {...data} handleChange={handlerFunction} />
-      </React.Fragment>
-    ));
-
   const dropdownOptions = createComponent({
     dataList: generalData.dropdown,
     ArgComponent: DropDown,
@@ -93,7 +93,7 @@ function General(): ReactElement {
       {dropdownOptions}
       {miscDropdownOptions}
       {sliderOptions}
-      <ScreenShotOptions {...{ handleScreenshotQuality, handleDropdown }} /> 
+      <ScreenShotOptions {...{ handleScreenshotQuality, handleDropdown }} />
     </Layout>
   );
 }

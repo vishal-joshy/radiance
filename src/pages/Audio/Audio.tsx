@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useAppDispatch } from 'store/hooks';
 import { createKeyPair } from 'utilities/string';
 import { setAudio, removeFromAudio } from 'store/audio/audioSlice';
@@ -9,7 +9,7 @@ import SingleSlider from 'components/Slider/SingleSlider';
 
 type Props = {};
 
-function Audio({}: Props) {
+function Audio({}: Props): ReactElement {
   const dispatch = useAppDispatch();
 
   const handleDropdown = (e: any) => {
@@ -21,8 +21,12 @@ function Audio({}: Props) {
     }
   };
 
-  const handleSlider = ({ id, sliderValue }: any) => {
-    dispatch(setAudio(createKeyPair(id, sliderValue)));
+  const handleSlider = ({ id, sliderValue, defaultValue }: any) => {
+    if (sliderValue === defaultValue) {
+      dispatch(removeFromAudio(id));
+    } else {
+      dispatch(setAudio(createKeyPair(id, sliderValue)));
+    }
   };
 
   return (
