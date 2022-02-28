@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import generalReducer from './general/generalSlice';
-import videoReducer from './video/videoSlice';
-import audioReducer from './audio/audioSlice';
+import generalReducer from './slices/generalSlice';
+import videoReducer from './slices/videoSlice';
+import audioReducer from './slices/audioSlice';
 
 export const store = configureStore({
   reducer: {
