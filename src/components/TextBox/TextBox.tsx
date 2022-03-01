@@ -8,6 +8,7 @@ function TextBox(): ReactElement {
   const generalData = useAppSelector((state) => state.general);
   const videoData = useAppSelector((state) => state.video);
   const audioData = useAppSelector((state) => state.audio);
+  const streamData = useAppSelector((state) => state.stream);
 
   const generalMainData = getStringValue(
     generalData.main,
@@ -21,6 +22,10 @@ function TextBox(): ReactElement {
   const audioMainData = getStringValue(
     audioData.main,
     (key: any) => `${key}=${audioData.main[key]}`
+  );
+  const streamMainData = getStringValue(
+    streamData.main,
+    (key: any) => `${key}=${streamData.main[key]}`
   );
 
   const staticText = {
@@ -45,7 +50,15 @@ function TextBox(): ReactElement {
         cols={50}
         rows={25}
         value={
-          generalMainData + '\n' + generalMiscData + '\n' + videoMainData + '\n' + audioMainData
+          generalMainData +
+          '\n' +
+          generalMiscData +
+          '\n' +
+          videoMainData +
+          '\n' +
+          audioMainData +
+          '\n' +
+          streamMainData
         }></textarea>
       <div className='textButton'>
         <button className='textButton__generate' onClick={generateFile}>
