@@ -6,7 +6,7 @@ import {
   removeFromGeneral,
   setGeneralMisc,
   removeFromGeneralMisc,
-} from 'store/general/generalSlice';
+} from 'store/slices/generalSlice';
 import { useAppDispatch } from 'store/hooks';
 import * as generalData from 'data/general';
 import DoubleSlider from 'components/Slider/DoubleSlider';

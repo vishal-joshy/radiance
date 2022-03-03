@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { useAppDispatch } from 'store/hooks';
 import { createKeyPair } from 'utilities/string';
-import { setAudio, removeFromAudio } from 'store/audio/audioSlice';
+import { setAudio, removeFromAudio } from 'store/slices/audioSlice';
 import * as audioData from 'data/audio';
 import DropDown from 'components/DropDown/DropDown';
 import Layout from 'components/Layout';
