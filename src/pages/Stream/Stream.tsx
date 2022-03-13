@@ -3,14 +3,14 @@ import { dropdown, cache, youTube } from 'data/stream';
 import DropDown from 'components/DropDown/DropDown';
 import Layout from 'components/Layout';
 import { setStream, removeFromStream } from 'store/slices/streamSlice';
-import { useAppDispatch } from 'store/hooks';
+import { useAppDispatch,useAppSelector } from 'store/hooks';
 import { createKeyPair } from 'utilities/string';
 
 type Props = {};
 
 function Stream({}: Props) {
   const dispatch = useAppDispatch();
-
+  const streamDataState = useAppSelector(state=>state.stream)
   const handleChange = (e: any) => {
     if (!e.target.value) {
       dispatch(removeFromStream(e.target.id));
@@ -22,17 +22,17 @@ function Stream({}: Props) {
 
   const dropdownValues = dropdown.map((item, index) => (
     <React.Fragment key={index}>
-      <DropDown {...item} handleChange={handleChange} />
+      <DropDown {...item} handleChange={handleChange} selectedValue={streamDataState.main[item.id]} />
     </React.Fragment>
   ));
 
   const youtubeValues = youTube.dropdown.map((item, index) => (
     <React.Fragment key={index}>
-      <DropDown {...item} handleChange={handleChange} />
+      <DropDown {...item} handleChange={handleChange} selectedValue={streamDataState.main[item.id]}/>
     </React.Fragment>
   ));
   
-  const cacheValues = <DropDown {...cache} handleChange={handleChange} />;
+  const cacheValues = <DropDown {...cache} handleChange={handleChange} selectedValue={streamDataState.main[cache.id]}/>;
 
   return (
     <Layout>
