@@ -7,13 +7,12 @@ import {
   setGeneralMisc,
   removeFromGeneralMisc,
   setGeneralDoubleSlider,
-  removeFromGeneralDoubleSlider
+  removeFromGeneralDoubleSlider,
 } from "store/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import * as generalData from "data/general";
 import DoubleSlider from "components/Slider/DoubleSlider";
 import { createKeyPair } from "utilities/string";
-import TextInput from "components/TextInput/TextInput";
 import ScreenshotFormat from "components/GeneralComponents/ScreenshotFormat";
 
 function General(): ReactElement {
@@ -32,7 +31,7 @@ function General(): ReactElement {
   const handleDoubleSlider = ({ id, firstSliderValue, secondSliderValue, getValue }: any) => {
     if (firstSliderValue && secondSliderValue) {
       const value = getValue(firstSliderValue, secondSliderValue);
-      const result = createKeyPair(id, {firstSliderValue,secondSliderValue,value});
+      const result = createKeyPair(id, { firstSliderValue, secondSliderValue, value });
       dispatch(setGeneralDoubleSlider(result));
     } else {
       dispatch(removeFromGeneralDoubleSlider(id));
@@ -65,7 +64,6 @@ function General(): ReactElement {
       dispatch(setGeneral(sliderData));
     }
   };
-
   return (
     <Layout>
       {generalData.dropdown.map((data) => (
@@ -86,26 +84,27 @@ function General(): ReactElement {
         />
       ))}
       {generalData.doubleSlider.map((data) => (
-        <DoubleSlider key={data.id} {...data} 
-        selectedValues={generalDataState.doubleSlider[data.id]}
-        handleChange={handleDoubleSlider} />
+        <DoubleSlider
+          key={data.id}
+          {...data}
+          selectedValues={generalDataState.doubleSlider[data.id]}
+          handleChange={handleDoubleSlider}
+        />
       ))}
 
-      <ScreenShotOptions {...{ handleScreenshotQuality, handleDropdown }} />
+      <h5>Screenshot</h5>
+      {generalData.screenShot.dropdown.map((data) => (
+        <DropDown
+          key={data.id}
+          {...data}
+          handleChange={handleDropdown}
+          selectedValue={generalDataState.main[data.id]}
+        />
+      ))}
+
+      <ScreenshotFormat handleChange={handleScreenshotQuality} />
     </Layout>
   );
 }
-
-const ScreenShotOptions = ({ handleScreenshotQuality, handleDropdown }: any) => (
-  <>
-    <h5>Screenshot</h5>
-    <TextInput {...generalData.screenShot.textInput} />
-    {generalData.screenShot.dropdown.map((data) => (
-      <DropDown key={data.id} {...data} handleChange={handleDropdown} />
-    ))}
-
-    <ScreenshotFormat handleChange={handleScreenshotQuality} />
-  </>
-);
 
 export default General;
