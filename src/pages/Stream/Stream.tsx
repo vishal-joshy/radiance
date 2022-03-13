@@ -19,16 +19,19 @@ function Stream({}: Props) {
       dispatch(setStream(result));
     }
   };
+
   const dropdownValues = dropdown.map((item, index) => (
     <React.Fragment key={index}>
       <DropDown {...item} handleChange={handleChange} />
     </React.Fragment>
   ));
+
   const youtubeValues = youTube.dropdown.map((item, index) => (
     <React.Fragment key={index}>
       <DropDown {...item} handleChange={handleChange} />
     </React.Fragment>
   ));
+  
   const cacheValues = <DropDown {...cache} handleChange={handleChange} />;
 
   return (

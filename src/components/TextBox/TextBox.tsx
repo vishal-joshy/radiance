@@ -15,10 +15,14 @@ function TextBox(): ReactElement {
     (key: any) => `${key}=${generalData.main[key]}`
   );
   const generalMiscData = getStringValue(generalData.misc, (key: any) => generalData.misc[key]);
+
+  const generalDoubleSliderData =getStringValue(generalData.doubleSlider, (key: any) => `${key}=${generalData.doubleSlider[key].value}`);
+  
   const videoMainData = getStringValue(
     videoData.main,
     (key: any) => `${key}=${videoData.main[key]}`
   );
+
   const audioMainData = getStringValue(
     audioData.main,
     (key: any) => `${key}=${audioData.main[key]}`
@@ -54,6 +58,8 @@ function TextBox(): ReactElement {
           '\n' +
           generalMiscData +
           '\n' +
+          generalDoubleSliderData+
+          '\n'+
           videoMainData +
           '\n' +
           audioMainData +

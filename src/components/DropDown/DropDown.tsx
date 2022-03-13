@@ -4,15 +4,16 @@ interface Props {
   id: string;
   label: string;
   options: any;
+  selectedValue?:any;
   handleChange(e: ChangeEvent<HTMLSelectElement>): void;
 }
 
-function DropDown({ id, options, label, handleChange }: Props): ReactElement {
+function DropDown({ id, options, label, selectedValue , handleChange }: Props): ReactElement {
   const optionKeys = Object.keys(options);
   return (
     <div className={style.container}>
       <label htmlFor={id}>{label}</label>
-      <select className={style.select} name={id} id={id} onChange={(e) => handleChange(e)}>
+      <select className={style.select} name={id} id={id} onChange={(e) => handleChange(e)} value={selectedValue}>
         {optionKeys.map((key, index) => (
           <option key={index} value={options[key]}>
             {key}

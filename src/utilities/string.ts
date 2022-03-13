@@ -3,7 +3,7 @@ const separateSlash = (routeString: string) => {
   return result;
 };
 
-const createKeyPair = (key: string, value: string | number) => {
+const createKeyPair = (key: string, value: any) => {
   const result: any = {};
   result[key] = value;
   return result;
