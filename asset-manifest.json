@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/radiance/static/css/main.673efcb4.css",
+    "main.js": "/radiance/static/js/main.35565a4d.js",
+    "static/js/787.d98d294f.chunk.js": "/radiance/static/js/787.d98d294f.chunk.js",
+    "index.html": "/radiance/index.html",
+    "main.673efcb4.css.map": "/radiance/static/css/main.673efcb4.css.map",
+    "main.35565a4d.js.map": "/radiance/static/js/main.35565a4d.js.map",
+    "787.d98d294f.chunk.js.map": "/radiance/static/js/787.d98d294f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.673efcb4.css",
+    "static/js/main.35565a4d.js"
+  ]
+}
