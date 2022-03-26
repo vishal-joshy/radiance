@@ -13,7 +13,7 @@ function DropDown({ id, options, label, selectedValue , handleChange }: Props): 
   return (
     <div className={style.container}>
       <label htmlFor={id}>{label}</label>
-      <select className={style.select} name={id} id={id} onChange={(e) => handleChange(e)} value={selectedValue}>
+      <select className={style.select} name={id} id={id} onChange={handleChange} value={selectedValue}>
         {optionKeys.map((key, index) => (
           <option key={index} value={options[key]}>
             {key}
