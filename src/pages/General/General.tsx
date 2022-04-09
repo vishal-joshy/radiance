@@ -64,6 +64,7 @@ function General(): ReactElement {
       dispatch(setGeneral(sliderData));
     }
   };
+  
   return (
     <Layout>
       {generalData.dropdown.map((data) => (

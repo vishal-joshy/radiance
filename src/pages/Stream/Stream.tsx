@@ -11,6 +11,7 @@ type Props = {};
 function Stream({}: Props) {
   const dispatch = useAppDispatch();
   const streamDataState = useAppSelector(state=>state.stream)
+  
   const handleChange = (e: any) => {
     if (!e.target.value) {
       dispatch(removeFromStream(e.target.id));
@@ -20,27 +21,29 @@ function Stream({}: Props) {
     }
   };
 
-  const dropdownValues = dropdown.map((item, index) => (
+  const dropdownOptions = dropdown.map((item, index) => (
     <React.Fragment key={index}>
       <DropDown {...item} handleChange={handleChange} selectedValue={streamDataState.main[item.id]} />
     </React.Fragment>
   ));
 
-  const youtubeValues = youTube.dropdown.map((item, index) => (
+  const youtubeOptions = youTube.dropdown.map((item, index) => (
     <React.Fragment key={index}>
-      <DropDown {...item} handleChange={handleChange} selectedValue={streamDataState.main[item.id]}/>
+      <DropDown {...item} handleChange={handleChange} selectedValue={streamDataState.main[item.id]} />
     </React.Fragment>
   ));
-  
-  const cacheValues = <DropDown {...cache} handleChange={handleChange} selectedValue={streamDataState.main[cache.id]}/>;
+
+  const cacheOptions = (
+    <DropDown {...cache} handleChange={handleChange} selectedValue={streamDataState.main[cache.id]} />
+  );
 
   return (
     <Layout>
-      {dropdownValues}
+      {dropdownOptions}
       <h1>Youtube</h1>
-      {youtubeValues}
+      {youtubeOptions}
       <h1>Cache</h1>
-      {cacheValues}
+      {cacheOptions}
     </Layout>
   );
 }

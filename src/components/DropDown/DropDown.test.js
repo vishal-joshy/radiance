@@ -1,16 +1,22 @@
-import { render,screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import DropDown from "./DropDown";
 
 const data = {
   id: "priority",
   label: "Priority",
-  options: ["default", "high", "abovenormal", "normal", "belownormal", "idle"],
+  options: {
+    default: "",
+    high: "high",
+    abovenormal: "abovenormal",
+    normal: "normal",
+    belownormal: "belownormal",
+    idle: "idle",
+  },
 };
 
 describe("DropDown component", () => {
-  it("render label", () => {
-    render(<DropDown id={data.id} label={data.label} values={data.options} />);
-    expect(screen.getByText(data.label)).toBeInTheDocument();
+  test("should render", () => {
+    render(<DropDown data={data} options={data.options} />);
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
-
 });
