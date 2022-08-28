@@ -3,7 +3,7 @@ import React, { ReactElement } from "react";
 interface Props {}
 
 function Footer({}: Props): ReactElement {
-  return <div>footer</div>;
+  return <div className=""></div>;
 }
 
 export default Footer;

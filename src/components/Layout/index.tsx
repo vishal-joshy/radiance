@@ -1,7 +1,6 @@
-import React, { ReactElement, ReactNode } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
 import TextBox from "components/TextBox/TextBox";
+import { ReactElement, ReactNode } from "react";
+import Header from "./Header";
 
 interface Props {
   children: ReactNode;
@@ -15,7 +14,7 @@ function Layout({ children }: Props): ReactElement {
         <TextBox />
         <div>{children}</div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
